@@ -1,0 +1,13 @@
+body {
+    bbackground-color: #f56a6a;
+    background: #ffffff;
+}
+.heading{
+    background-color: #f56a6a;
+    font-family: "Roboto Slab", serif;
+}
+#name{
+    color: navy;
+    margin-left: 20px;
+    align-item: "center";
+}
