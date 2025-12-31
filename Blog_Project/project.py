@@ -1,10 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
+import smtplib as st
+import os
+from dotenv import load_dotenv
 # from blog import Blog
+
+load_dotenv()
+blog_pass = os.environ.get('blog_post')
 
 blog_url = "https://api.npoint.io/955c1e57d6bfa98e22ae"
 blog_ = requests.get(blog_url)
 blog_res = blog_.json()
+
 
 
 app = Flask(__name__)
@@ -15,6 +22,27 @@ def home():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/login", methods=['POST', 'GET'])
+def data_received():
+    if request.method == 'POST':
+        name = request.form["name"]
+        email = request.form["email"]
+        message = request.form["message"]
+        ph = request.form["phone"]
+        password = blog_pass
+        my_mail = "awsdineshdini@gmail.com"
+        with st.SMTP("smtp.gmail.com") as connect:
+            connect.starttls()
+            connect.login(user=my_mail, password=password)
+            connect.sendmail(
+                from_addr=my_mail,
+                to_addrs= email,
+                msg= message
+            )
+        return render_template("login.html", name=name, email=email, mssg=message, phone=ph , msg_sent=True)
+    return render_template("login.html", msg_sent=False)
+
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
