@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Base Template{% endblock %}</title>
+    {{ bootstrap.load_css() }}
+</head>
+<body>
+
+
+    {% block content %}
+    <h1>This is Base Template</h1>
+    {% endblock %}
+
+{{ bootstrap.load_js() }}
+</body>
+</html>
