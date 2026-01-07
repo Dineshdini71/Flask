@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Restaurants{% endblock %}
+{% block content %}
+<div class="container">
+   <div class="row">
+      <div class="col-sm-12">
+         <h1>All Cafes</h1>
+         <table class="table">
+        <thead>
+          <td><b>Cafe</b></td>
+          <td><b>Location</b></td>
+          <td><b>Open</b></td>
+          <td><b>Close</b></td>
+          <td><b>coffee Rating</b></td>
+          <td><b>wifi Rating</b></td>
+          <td><b>Power Rating</b></td>
+        </thead>
+        {% for row in cafes %}
+        <tr>
+          {% for item in row %} {% if item[0:4] == "http" %}
+          <td><a href="{{ item }}">Maps Link</a></td>
+          {% else %}
+          <td>{{ item }}</td>
+          {% endif %} {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+         <p><a class="btn btn-lg btn-block  btn-warning" href="{{ url_for('home') }}" role="button">Home</a>
+          <a class="btn btn-lg btn-block  btn-outline-warning" href="{{ url_for('add_cafe') }}" role="button">Add Cafe</a></p>
+      </div>
+   </div>
+</div>
+{% endblock %}
